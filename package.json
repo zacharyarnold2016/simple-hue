@@ -1,0 +1,29 @@
+{
+  "name": "simple-hue",
+  "version": "0.0.1",
+  "description": "Simplifies the Hue light interaction process by providing a set of tools for developers to manipulate parameters in their lights while also providing a simple solution to synchronization with the Phillips Hue Bridge",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zacharyarnold2016/simple-hue.git"
+  },
+  "keywords": [
+    "Hue",
+    "Phillips",
+    "Lights",
+    "Toolkit"
+  ],
+  "author": "Zachary Arnold",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zacharyarnold2016/simple-hue/issues"
+  },
+  "homepage": "https://github.com/zacharyarnold2016/simple-hue#readme",
+  "dependencies": {
+    "superagent": "^8.0.3"
+  }
+}
