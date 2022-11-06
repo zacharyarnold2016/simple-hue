@@ -25,5 +25,8 @@
   "homepage": "https://github.com/zacharyarnold2016/simple-hue#readme",
   "dependencies": {
     "superagent": "^8.0.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
   }
 }
