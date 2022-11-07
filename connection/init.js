@@ -36,14 +36,12 @@ const getIP = async () => {
  * Initializes and authenticates an app connection for the user.
  *
  * @param {String} name: desired app name
+ * @param {String} ip: ip address for Hue Bridge
+ *
+ * @returns object: Values derived from the user creation process. IP and User
  */
-const synchronizeApp = async (name) => {
+const synchronizeApp = async (name, ip) => {
   try {
-    // let ip;
-    // if (!ip) {
-    //   ip = await getIP();
-    // }
-
     const { _body } = await superagent.post(`https://${ip}/api`).send({
       devicetype: name,
     });
@@ -66,10 +64,35 @@ const synchronizeApp = async (name) => {
  * synchronizeApp function. Alternatively May add a returning option as as well as
  * seperate option.
  */
-const storeCredentials = async (ip, username) => {
-  appendFile(".env", `\nIP=${ip} \nUSERNAME=${username}`, (err) => {
-    console.log(err);
-  });
+const storeCredentials = async ({ ip, username }) => {
+  try {
+    appendFile(".env", `\nIP=${ip} \nUSERNAME=${username}`, (err) => {
+      console.log(err);
+    });
+  } catch (err) {
+    throw err;
+  }
 };
 
-export { getIP, synchronizeApp, storeCredentials };
+/**
+ * This is a oneshot of all of this code to get a quick start on the sync process.
+ */
+const init = async (name) => {
+  try {
+    dotenv.config();
+    let ip = process.env.IP;
+
+    if (!ip) ip = await getIP();
+
+    const credentials = await synchronizeApp();
+    await storeCredentials(credentials).then(() => {
+      console.log(
+        "Initialization Process Complete, check .env file for credentials"
+      );
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
+export { getIP, synchronizeApp, storeCredentials, init };
